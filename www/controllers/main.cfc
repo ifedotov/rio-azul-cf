@@ -8,20 +8,27 @@ component {
     }
     
     rc.buildings = [];
-    rc.unzoned_zone_name = 'Other';
+    rc.unzoned_zone_name = 'Unzoned';
 
     if(isJSON(local.result.filecontent)) {
       rc.buildings = deserializeJSON(local.result.filecontent).data.items;
       rc.buildings.sort(
-        function(a,b) {          
-          if(!len(a.buildingzone)) {
-            return CompareNoCase( 'zzzzz' & a.buildingname, b.buildingzone & b.buildingname )
-          } else if (!len(b.buildingzone)) {
-            return CompareNoCase( a.buildingzone & a.buildingname,  'zzzzz' & b.buildingname )
-          } else {
-            return CompareNoCase( a.buildingzone & a.buildingname, b.buildingzone & b.buildingname )
+        function(a,b) {
+          var aZone = a.buildingzone;
+          var bZone = b.buildingzone;
+
+          if(aZone == 'Other Bay Area') {
+            aZone = 'zzzzz';
+          } else if(!len(aZone)) {
+            aZone = 'zzzzzz';
           }
-          
+
+          if(bZone == 'Other Bay Area') {
+            bZone = 'zzzzz';
+          } else if(!len(bZone)) {
+            bZone = 'zzzzzz';
+          }
+          return CompareNoCase( aZone & a.buildingname, bZone & b.buildingname )
         }
       );
       rc.zoneBuldingCount = zoneBuildingCounts(rc.buildings, rc.unzoned_zone_name);

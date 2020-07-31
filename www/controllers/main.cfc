@@ -7,6 +7,7 @@ component {
 			cfhttpparam(type="header", name="Content-type" value="application/json");
     }
     
+    rc.number_of_columns = 6;
     rc.buildings = [];
     rc.unzoned_zone_name = 'Unzoned';
 

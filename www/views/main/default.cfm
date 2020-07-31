@@ -9,7 +9,7 @@
           <cfset var zone_count = 0>
           <cfset var column_count = 1>
           <cfset var buildings_in_zone = rc.zoneBuldingCount[rc.buildings[i].buildingzone]>
-          <cfset var buildings_in_column = ceiling(rc.zoneBuldingCount[rc.buildings[i].buildingzone]/6)>
+          <cfset var buildings_in_column = ceiling(rc.zoneBuldingCount[rc.buildings[i].buildingzone]/rc.number_of_columns)>
           <cfset current_zone = rc.buildings[i].buildingzone>
           <h4>#rc.buildings[i].buildingzone#</h4>
           <div class="row">
@@ -26,7 +26,7 @@
           
           <cfif zone_count == buildings_in_zone>  
             </div><!--- close column --->
-            <cfloop index="j" from="1" to="#6-column_count#">
+            <cfloop index="j" from="1" to="#rc.number_of_columns-column_count#">
               <div class="col-sm"></div>
             </cfloop>
             

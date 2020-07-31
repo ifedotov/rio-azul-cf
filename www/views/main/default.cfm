@@ -1,7 +1,8 @@
 <cfset var current_zone = "">
 <cfoutput>
   <div class="container-fluid">
-    <h2 style="border-bottom: 1px solid grey">Index</h2>
+    <h2>Index</h2>
+    <hr>
     
       <cfloop index="i" from=1 to="#arrayLen(rc.buildings)#">
         <cfif current_zone != rc.buildings[i].buildingzone>
@@ -37,6 +38,7 @@
 
           <cfif i == arrayLen(rc.buildings) || current_zone != rc.buildings[i+1].buildingzone>
             </div>
+            <hr>
           </cfif>
       </cfloop>
     
